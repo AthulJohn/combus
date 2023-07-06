@@ -1,0 +1,3 @@
+class BusData {
+  const BusData();
+}
