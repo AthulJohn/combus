@@ -1,8 +1,10 @@
+import 'package:combus/models/trip.dart';
 import 'package:combus/view/components/bus_card.dart';
 import 'package:combus/models/bus.dart';
 import 'package:flutter/material.dart';
 
 import 'view/screens/user/home_screen.dart';
+import 'view/screens/user/tracker_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,7 +20,7 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Poppins',
         ),
-        home: const HomeScreen());
+        home: const TrackerScreen(TripData()));
   }
 }
 
