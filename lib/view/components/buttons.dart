@@ -34,9 +34,26 @@ class AppFloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.large(
-        onPressed: () {},
-        backgroundColor: AppColorTheme.bgColor,
-        child: Icon(icon, color: AppColorTheme.primaryColor));
+    return Container(
+      // Floating action button didnt gave size flexibility.
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 10,
+                offset: const Offset(0, 5))
+          ]),
+      child: IconButton(
+          iconSize: 50,
+          onPressed: () {},
+          // backgroundColor: AppColorTheme.bgColor,
+          icon: Icon(
+            icon,
+            color: AppColorTheme.primaryColor,
+            // size: 30,
+          )),
+    );
   }
 }
