@@ -50,7 +50,7 @@ class TrackerScreen extends StatelessWidget {
                         border: Border.all(color: Colors.white, width: 2),
                         size: 25,
                         color: index <= curStop
-                            ? Color(0xffE4DAD3)
+                            ? AppColorTheme.disabled
                             : AppColorTheme.primaryColor,
                       ),
                       itemExtent: 100,
@@ -58,10 +58,10 @@ class TrackerScreen extends StatelessWidget {
                           SolidLineConnector(
                         thickness: 10,
                         color: index <= curStop
-                            ? Color(0xffE4DAD3)
+                            ? AppColorTheme.disabled
                             : index == curStop + 1
                                 ? AppColorTheme.primaryColor
-                                : Color(0xffE5C7AF),
+                                : AppColorTheme.lightPrimary,
                       ),
                       contentsBuilder: (context, index) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
