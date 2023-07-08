@@ -1,4 +1,5 @@
 import 'package:combus/constants/color_theme.dart';
+import 'package:combus/constants/text_styles.dart';
 import 'package:combus/models/trip.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
@@ -40,8 +41,8 @@ class TrackerScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: Timeline.tileBuilder(
-                    padding: const EdgeInsetsDirectional.symmetric(
-                        horizontal: 10, vertical: 60),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(10, 60, 10, 30),
                     theme: TimelineThemeData(
                         nodePosition: 0.3, indicatorPosition: 0),
                     builder: TimelineTileBuilder.connected(
@@ -63,15 +64,26 @@ class TrackerScreen extends StatelessWidget {
                                 ? AppColorTheme.primaryColor
                                 : AppColorTheme.lightPrimary,
                       ),
+                      oppositeContentsBuilder: (context, index) => Align(
+                        alignment: Alignment.topCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            '2:$index PM',
+                          ),
+                        ),
+                      ),
                       contentsBuilder: (context, index) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         // mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text('Timeline Event $index'),
                           ),
+                          SizedBox(height: 25),
                           if (index == curStop) Text("   Enroute to Success...")
                         ],
                       ),
@@ -105,29 +117,15 @@ class BottomPanel extends StatelessWidget {
           color: AppColorTheme.primaryColor),
       padding: EdgeInsets.all(20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Text(
-          'EYEWASH MOTORS',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-          ),
-        ),
-        SizedBox(height: 20),
+        Text('EYEWASH MOTORS', style: AppTextStyles.highWhite),
+        SizedBox(height: 15),
         Text(
           'Next Stop',
           style: TextStyle(
             color: Colors.white,
           ),
         ),
-        Text(
-          'Kothamangalam - 9 Kms',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
+        Text('Kothamangalam - 9 Kms', style: AppTextStyles.mediumWhite),
         SizedBox(height: 10),
         Text(
           'Previous Stop',
@@ -135,13 +133,7 @@ class BottomPanel extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        Text(
-          'Vazhakulam',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 17,
-          ),
-        ),
+        Text('Vazhakulam', style: AppTextStyles.lowWhite),
       ]),
     );
   }
@@ -194,7 +186,7 @@ class BusDetailsBanner extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Palariputhenparambil Motor Service",
-                        style: TextStyle(color: Colors.white, fontSize: 17)),
+                        style: AppTextStyles.lowWhite),
                     Text("KL 07 1234", style: TextStyle(color: Colors.white)),
                   ],
                 ),

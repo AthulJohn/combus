@@ -4,6 +4,7 @@ import 'package:combus/view/components/buttons.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/bus.dart';
+import '../../components/background_design.dart';
 import '../../components/bus_card.dart';
 import '../../components/route_search_card.dart';
 
@@ -23,42 +24,20 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: AppColorTheme.primaryColor,
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.menu))],
       ),
-      body: Stack(
-        fit: StackFit.expand,
+      body: BackgroundDesign(
+          child: ListView(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                  flex: 3,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: AppColorTheme.primaryColor,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft:
-                                Radius.elliptical(width / 2, width / 20),
-                            bottomRight:
-                                Radius.elliptical(width / 2, width / 20))),
-                  )),
-              Spacer(flex: 5),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+            child: RouteSearchCard(),
           ),
-          ListView(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
-                child: RouteSearchCard(),
-              ),
-              for (int i = 0; i < 10; i++)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: BusDataCard(BusData()),
-                ),
-            ],
-          )
+          for (int i = 0; i < 10; i++)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BusDataCard(BusData()),
+            ),
         ],
-      ),
+      )),
       floatingActionButton: AppFloatingButton(Icons.qr_code_rounded),
     );
   }

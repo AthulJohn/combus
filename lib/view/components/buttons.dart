@@ -6,20 +6,28 @@ import 'package:flutter/src/widgets/placeholder.dart';
 class AppFilledButton extends StatelessWidget {
   final String? text;
   final IconData? icon;
-  const AppFilledButton({super.key, this.text, this.icon});
+  final bool isWhite;
+  const AppFilledButton(
+      {super.key, this.text, this.icon, this.isWhite = false});
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
         onPressed: () {},
         style: TextButton.styleFrom(
-            backgroundColor: AppColorTheme.primaryColor,
-            foregroundColor: Colors.white,
+            backgroundColor:
+                isWhite ? AppColorTheme.bgColor : AppColorTheme.primaryColor,
+            foregroundColor:
+                isWhite ? AppColorTheme.primaryColor : Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+                side: BorderSide(
+                    color: isWhite ? Colors.grey : Color(0xffCB8C5C),
+                    width: 1))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
           children: [
             if (text != null) Text(text!),
             if (icon != null) Icon(icon)
