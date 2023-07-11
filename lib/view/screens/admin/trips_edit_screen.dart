@@ -4,11 +4,6 @@ import 'package:combus/view/components/buttons.dart';
 import 'package:combus/view/components/text_fields.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/bus.dart';
-import '../../components/background_design.dart';
-import '../../components/bus_card.dart';
-import '../../components/route_search_card.dart';
-
 class TripEditScreen extends StatelessWidget {
   const TripEditScreen({super.key});
 

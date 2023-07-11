@@ -4,6 +4,8 @@ import 'color_theme.dart';
 
 abstract class AppTextStyles {
   static TextStyle get mediumBold =>
+      TextStyle(fontSize: 21, fontWeight: FontWeight.w500, height: 1.2);
+  static TextStyle get mediumSemiBold =>
       TextStyle(fontSize: 21, fontWeight: FontWeight.bold, height: 1.2);
   static TextStyle get medium => TextStyle(fontSize: 21, height: 1.2);
 
