@@ -10,7 +10,14 @@ abstract class AppTextStyles {
   static TextStyle get bold =>
       TextStyle(fontSize: 17, fontWeight: FontWeight.bold, height: 1.2);
 
+  static TextStyle get semiBold =>
+      TextStyle(fontSize: 17, fontWeight: FontWeight.w600, height: 1.2);
+
   static TextStyle get smallGrey => TextStyle(fontSize: 12, color: Colors.grey);
+
+  static TextStyle get grey => TextStyle(color: Colors.grey);
+  static TextStyle get semiBoldOrange =>
+      TextStyle(color: AppColorTheme.primaryColor, fontWeight: FontWeight.w600);
 
   static TextStyle get highBoldOrange => TextStyle(
       fontSize: 24,

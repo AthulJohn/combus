@@ -12,6 +12,7 @@ dependencies:
   text_scroll: ^0.2.0
   timelines: ^0.1.0
   flutter_map: ^5.0.0
+  flutter_analog_clock: ^1.0.3
 
 dev_dependencies:
   flutter_test:

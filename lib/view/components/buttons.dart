@@ -65,3 +65,41 @@ class AppFloatingButton extends StatelessWidget {
     );
   }
 }
+
+class AppFloatingLabelButton extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const AppFloatingLabelButton(
+      {super.key, required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    // return Container(
+    //   // Floating action button didnt gave size flexibility.
+    //   decoration: BoxDecoration(
+    //       shape: BoxShape.circle,
+    //       color: Colors.white,
+    //       boxShadow: [
+    //         BoxShadow(
+    //             color: Colors.black.withOpacity(0.2),
+    //             blurRadius: 10,
+    //             offset: const Offset(0, 5))
+    //       ]),
+    //   child: IconButton(
+    //       iconSize: 50,
+    //       onPressed: () {},
+    //       // backgroundColor: AppColorTheme.bgColor,
+    //       icon: Icon(
+    //         icon,
+    //         color: AppColorTheme.primaryColor,
+    //         // size: 30,
+    //       )),
+    // );
+    return FloatingActionButton.extended(
+      onPressed: () {},
+      label: Text(text),
+      icon: Icon(icon),
+      backgroundColor: AppColorTheme.primaryColor,
+    );
+  }
+}
