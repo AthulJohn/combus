@@ -60,6 +60,20 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "userTypes"
+    productFlavors {
+        admin {
+            dimension "userTypes"
+            resValue "string", "app_name", "Admin App"
+            applicationIdSuffix ".admin"
+        }
+        user {
+            dimension "userTypes"
+            resValue "string", "app_name", "User App"
+            applicationIdSuffix ".user"
+        }
+    }
 }
 
 flutter {

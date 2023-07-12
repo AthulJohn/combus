@@ -35,9 +35,17 @@ class BusDetailForm extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 28.0, horizontal: 15),
         child: ListView(
           children: [
-            TextFieldWithQuestion(),
+            TextFieldWithQuestion(
+              question: "Enter the Name of the Bus",
+              hintText: "Bus Name",
+              onChanged: (val) {},
+            ),
             SizedBox(height: 25),
-            TextFieldWithQuestion(),
+            TextFieldWithQuestion(
+              question: "Enter the Registration Number of the Bus",
+              hintText: "KL XX 0000",
+              onChanged: (val) {},
+            ),
             SizedBox(height: 25),
             ChipsInput(),
             SizedBox(height: 25),

@@ -4,34 +4,41 @@ import 'package:flutter/material.dart';
 
 class OutlineTextField extends StatelessWidget {
   final String? hintText;
-  const OutlineTextField({super.key, this.hintText});
+  final void Function(String)? onChanged;
+  const OutlineTextField({super.key, this.hintText, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[400]!)),
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColorTheme.primaryColor)),
-          isDense: true,
-          hintText: hintText),
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey[400]!)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColorTheme.primaryColor)),
+        isDense: true,
+        hintText: hintText,
+      ),
+      onChanged: onChanged,
     );
   }
 }
 
 class TextFieldWithQuestion extends StatelessWidget {
-  const TextFieldWithQuestion({super.key});
+  final String question;
+  final String? hintText;
+  final void Function(String)? onChanged;
+  const TextFieldWithQuestion(
+      {super.key, required this.question, this.hintText, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("What is your name?", style: AppTextStyles.bold),
+        Text(question, style: AppTextStyles.bold),
         SizedBox(height: 10),
-        OutlineTextField(hintText: "Enter your name")
+        OutlineTextField(hintText: hintText, onChanged: onChanged)
       ],
     );
   }

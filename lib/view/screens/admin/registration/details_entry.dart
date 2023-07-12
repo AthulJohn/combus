@@ -48,10 +48,14 @@ class SigninScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Let\'s get started',
+                        'What should we call you?',
                         style: AppTextStyles.high,
                       ),
-                      TextFieldWithQuestion(),
+                      TextFieldWithQuestion(
+                        question: "Enter your name or your Company Name",
+                        hintText: "ABC Motors",
+                        onChanged: (val) {},
+                      ),
                       AppFilledButton(text: "Proceed"),
                     ],
                   ),

@@ -51,8 +51,12 @@ class SigninScreen extends StatelessWidget {
                         'Let\'s get started',
                         style: AppTextStyles.high,
                       ),
-                      TextFieldWithQuestion(),
-                      AppFilledButton(text: "Proceed"),
+                      TextFieldWithQuestion(
+                        question: "Enter your phone number",
+                        hintText: "+91 0000000000",
+                        onChanged: (val) {}, //TODO: Make it phone Field
+                      ),
+                      AppFilledButton(text: "Proceed"), // Make it Bigger
                     ],
                   ),
                 ))

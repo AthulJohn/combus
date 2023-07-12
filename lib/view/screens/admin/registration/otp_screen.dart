@@ -48,10 +48,13 @@ class SigninScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Let\'s get started',
+                        'Verify the OTP sent to your phone',
                         style: AppTextStyles.high,
                       ),
-                      TextFieldWithQuestion(),
+                      TextFieldWithQuestion(
+                        question: "Enter the OTP",
+                        onChanged: (val) {},
+                      ),
                       AppFilledButton(text: "Proceed"),
                     ],
                   ),
