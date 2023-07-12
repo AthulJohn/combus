@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'text_fields.dart';
 
 class RouteSearchCard extends StatelessWidget {
-  const RouteSearchCard({super.key});
+  final void Function(String, String) onSearched;
+  const RouteSearchCard({super.key, required this.onSearched});
 
   @override
   Widget build(BuildContext context) {
