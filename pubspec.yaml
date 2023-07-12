@@ -14,6 +14,7 @@ dependencies:
   flutter_map: ^5.0.0
   flutter_analog_clock: ^1.0.3
   toggle_switch: ^2.1.0
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

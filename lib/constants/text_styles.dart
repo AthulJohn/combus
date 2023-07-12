@@ -27,6 +27,12 @@ abstract class AppTextStyles {
       fontWeight: FontWeight.bold,
       height: 1.2);
 
+  static TextStyle get high => TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
+        height: 1.2,
+      );
+
   static TextStyle get highWhite => TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w600,
