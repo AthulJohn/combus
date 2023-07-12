@@ -13,7 +13,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -29,7 +28,9 @@ class HomeScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
-            child: RouteSearchCard(),
+            child: RouteSearchCard(
+              onSearched: (start, dest) {},
+            ),
           ),
           for (int i = 0; i < 10; i++)
             Padding(

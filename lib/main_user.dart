@@ -7,6 +7,7 @@ import 'package:combus/view/screens/admin/registration/signin_screen.dart';
 import 'package:combus/view/screens/admin/routes_screen.dart';
 import 'package:combus/view/screens/admin/stop_selection.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'view/screens/admin/timing_select_screen.dart';
 import 'view/screens/user/home_screen.dart';
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'ComBus',
         theme: ThemeData(
           fontFamily: 'Poppins',
