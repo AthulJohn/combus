@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 class OutlineTextField extends StatelessWidget {
   final String? hintText;
   final void Function(String)? onChanged;
-  const OutlineTextField({super.key, this.hintText, this.onChanged});
+  final TextEditingController? textController;
+  const OutlineTextField(
+      {super.key, this.hintText, this.onChanged, this.textController});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: textController,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(

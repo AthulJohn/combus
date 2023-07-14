@@ -1,17 +1,20 @@
 import 'package:combus/constants/color_theme.dart';
 import 'package:combus/constants/text_styles.dart';
+import 'package:combus/controllers/bus_search_controller.dart';
+import 'package:combus/controllers/bus_tracking_controller.dart';
 import 'package:combus/models/trip.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timelines/timelines.dart';
 
+import '../../../models/bus.dart';
+
 class TrackerScreen extends StatelessWidget {
-  final TripData? tripData;
-  const TrackerScreen(this.tripData, {super.key});
+  final BusData bus;
+  const TrackerScreen(this.bus, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    int curStop = 5;
-    int leng = 14;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColorTheme.primaryColor,
@@ -37,63 +40,72 @@ class TrackerScreen extends StatelessWidget {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            Column(
-              children: [
-                Expanded(
-                  child: Timeline.tileBuilder(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(10, 60, 10, 30),
-                    theme: TimelineThemeData(
-                        nodePosition: 0.3, indicatorPosition: 0),
-                    builder: TimelineTileBuilder.connected(
-                      connectionDirection: ConnectionDirection.before,
-                      indicatorBuilder: (context, index) => DotIndicator(
-                        border: Border.all(color: Colors.white, width: 2),
-                        size: 25,
-                        color: index <= curStop
-                            ? AppColorTheme.disabled
-                            : AppColorTheme.primaryColor,
-                      ),
-                      itemExtent: 100,
-                      connectorBuilder: (context, index, type) =>
-                          SolidLineConnector(
-                        thickness: 10,
-                        color: index <= curStop
-                            ? AppColorTheme.disabled
-                            : index == curStop + 1
-                                ? AppColorTheme.primaryColor
-                                : AppColorTheme.lightPrimary,
-                      ),
-                      oppositeContentsBuilder: (context, index) => Align(
-                        alignment: Alignment.topCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            '2:$index PM',
+            GetBuilder<BusTrackingController>(
+                init: BusTrackingController(trip: bus.currentTrip),
+                builder: (controller) {
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: Timeline.tileBuilder(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              10, 60, 10, 30),
+                          theme: TimelineThemeData(
+                              nodePosition: 0.3, indicatorPosition: 0),
+                          builder: TimelineTileBuilder.connected(
+                            connectionDirection: ConnectionDirection.before,
+                            indicatorBuilder: (context, index) => DotIndicator(
+                              border: Border.all(color: Colors.white, width: 2),
+                              size: 25,
+                              color: index <= controller.lastStopIndex
+                                  ? AppColorTheme.disabled
+                                  : AppColorTheme.primaryColor,
+                            ),
+                            itemExtent: 100,
+                            connectorBuilder: (context, index, type) =>
+                                SolidLineConnector(
+                              thickness: 10,
+                              color: index <= controller.lastStopIndex
+                                  ? AppColorTheme.disabled
+                                  : index == controller.lastStopIndex + 1
+                                      ? AppColorTheme.primaryColor
+                                      : AppColorTheme.lightPrimary,
+                            ),
+                            oppositeContentsBuilder: (context, index) => Align(
+                              alignment: Alignment.topCenter,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  "${controller.trip.times[index].hour} : ${controller.trip.times[index].minute}",
+                                ),
+                              ),
+                            ),
+                            contentsBuilder: (context, index) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              // mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  child: Text(
+                                      controller.trip.route.stops[index].name),
+                                ),
+                                const SizedBox(height: 25),
+                                if (index == controller.lastStopIndex &&
+                                    index < controller.trip.stopCount - 1)
+                                  Text(
+                                      "   Enroute to ${controller.trip.route.stops[index + 1].name}")
+                              ],
+                            ),
+                            itemCount: controller.trip.stopCount,
                           ),
                         ),
                       ),
-                      contentsBuilder: (context, index) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        // mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Text('Timeline Event $index'),
-                          ),
-                          SizedBox(height: 25),
-                          if (index == curStop) Text("   Enroute to Success...")
-                        ],
-                      ),
-                      itemCount: leng,
-                    ),
-                  ),
-                ),
-                BottomPanel()
-              ],
-            ),
+                      const BottomPanel()
+                    ],
+                  );
+                }),
             // Positioned(
             //   right: 10,
             //   top: 10,
@@ -116,25 +128,41 @@ class BottomPanel extends StatelessWidget {
               BorderRadius.vertical(top: Radius.elliptical(width / 2, 10)),
           color: AppColorTheme.primaryColor),
       padding: EdgeInsets.all(20),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Text('EYEWASH MOTORS', style: AppTextStyles.highWhite),
-        SizedBox(height: 15),
-        Text(
-          'Next Stop',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        Text('Kothamangalam - 9 Kms', style: AppTextStyles.mediumWhite),
-        SizedBox(height: 10),
-        Text(
-          'Previous Stop',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        Text('Vazhakulam', style: AppTextStyles.lowWhite),
-      ]),
+      child: GetBuilder<BusTrackingController>(
+          init: Get.find<BusTrackingController>(),
+          builder: (controller) {
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('EYEWASH MOTORS', style: AppTextStyles.highWhite),
+                  SizedBox(height: 15),
+                  if (controller.lastStopIndex == controller.trip.stopCount - 1)
+                    Text('Reached Destination',
+                        style: AppTextStyles.mediumWhite),
+                  if (controller.lastStopIndex < controller.trip.stopCount - 1)
+                    Text(
+                      'Next Stop',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  if (controller.lastStopIndex < controller.trip.stopCount - 1)
+                    Text(
+                        '${controller.trip.route.stops[controller.lastStopIndex + 1].name} - 9 Kms',
+                        style: AppTextStyles.mediumWhite),
+                  SizedBox(height: 10),
+                  Text(
+                    'Previous Stop',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                      controller
+                          .trip.route.stops[controller.lastStopIndex].name,
+                      style: AppTextStyles.lowWhite),
+                ]);
+          }),
     );
   }
 }

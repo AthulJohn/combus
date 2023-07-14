@@ -1,14 +1,18 @@
 import 'package:combus/constants/text_styles.dart';
 import 'package:combus/models/bus.dart';
+import 'package:combus/view/screens/user/tracker_screen.dart';
+// import 'package:combus/models/bus_search_.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:text_scroll/text_scroll.dart';
 
+import '../../models/trip.dart';
 import 'buttons.dart';
 
 class BusDataCard extends StatelessWidget {
-  final BusData busData;
+  final BusData bus;
   final bool isAdmin;
-  const BusDataCard(this.busData, {super.key, this.isAdmin = false});
+  const BusDataCard(this.bus, {super.key, this.isAdmin = false});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +37,11 @@ class BusDataCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Kavitha",
+                        bus.name,
                         style: AppTextStyles.mediumBold,
                       ),
                       TextScroll(
-                        "Thodupuzha-Vazhakulam via dsdfsdf fse sg s we r sd",
+                        bus.routeDesc,
                         mode: TextScrollMode.endless,
                         velocity:
                             const Velocity(pixelsPerSecond: Offset(30, 0)),
@@ -65,11 +69,11 @@ class BusDataCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "Kaloor",
+                            (bus.previousStop?.name ?? "Idle"),
                             style: AppTextStyles.highBoldOrange,
                           ),
                           Text(
-                            "5:45 PM",
+                            bus.previousTime?.toString().substring(1, 4) ?? "-",
                             style: AppTextStyles.smallGrey,
                           ),
                         ],
@@ -85,7 +89,12 @@ class BusDataCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const AppFilledButton(text: "Track"),
+                  AppFilledButton(
+                    text: "Track",
+                    onPressed: () {
+                      Get.to(TrackerScreen(bus));
+                    },
+                  ),
                   const SizedBox(height: 5),
                   isAdmin
                       ? IconButton(

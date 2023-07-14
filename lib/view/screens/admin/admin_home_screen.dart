@@ -1,5 +1,7 @@
 import 'package:combus/constants/color_theme.dart';
 import 'package:combus/constants/text_styles.dart';
+import 'package:combus/models/bus_search_result.dart';
+import 'package:combus/models/bus_stop.dart';
 import 'package:combus/view/components/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +45,9 @@ class AdminHomeScreen extends StatelessWidget {
             for (int i = 0; i < 2; i++)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: BusDataCard(BusData()),
+                child: BusDataCard(
+                  BusData(name: "Bus $i"),
+                ),
               ),
           ],
         ),

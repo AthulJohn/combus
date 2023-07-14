@@ -7,13 +7,14 @@ class AppFilledButton extends StatelessWidget {
   final String? text;
   final IconData? icon;
   final bool isWhite;
+  final void Function()? onPressed;
   const AppFilledButton(
-      {super.key, this.text, this.icon, this.isWhite = false});
+      {super.key, this.text, this.icon, this.isWhite = false, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-        onPressed: () {},
+        onPressed: onPressed ?? () {},
         style: TextButton.styleFrom(
             backgroundColor:
                 isWhite ? AppColorTheme.bgColor : AppColorTheme.primaryColor,
